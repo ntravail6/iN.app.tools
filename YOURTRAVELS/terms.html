@@ -122,7 +122,47 @@ h2{font-size:clamp(17px,15.6px + .45vw,21px)}
 @media (min-width:640px){.item dl{display:grid;grid-template-columns:7em 1fr;column-gap:20px;row-gap:12px;align-items:baseline}.item dt{margin:0}.item dd{margin:0}}
 .hd{flex-wrap:wrap;gap:10px 18px;margin-bottom:clamp(28px,5vw,56px)}.brand{white-space:nowrap;letter-spacing:clamp(3px,1.1vw,6px)}.nav{white-space:nowrap}
 .brand{font-size:clamp(13px,12px + .2vw,15px)}.nav{font-size:clamp(12.5px,12px + .2vw,14.5px)}
-</style><style>@media (max-width:760px){body{padding-left:24px!important;padding-right:24px!important}}</style><link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"><link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png"><link rel="apple-touch-icon" href="images/apple-touch-icon.png"></head><body><div class="page"><header class="hd"><a class="brand" href="https://in-app-tools.pages.dev/YOURTRAVELS/">YOUR <em>TRAVELS</em></a><nav class="nav top"><a href="https://in-app-tools.pages.dev/YOURTRAVELS/contact">お問い合わせ</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/">ホームに戻る</a></nav></header><h1>利用規約・免責事項</h1><p class="upd">最終更新日：2026年11月2日</p><p class="lead">この利用規約・免責事項（以下「本規約」といいます。）は、iN（以下「運営者」といいます。）が提供するiPhone向けアプリ「YOUR TRAVELS」（以下「本アプリ」といいます。）の利用条件と、運営者の責任の範囲を定めるものです。</p>
+
+/* 切り替え（右上のメニュー・タブ） 11/19 */
+:root{--px:clamp(18px,5vw,40px)}
+.menu-btn{flex:none;width:44px;height:44px;margin-right:-10px;border:0;background:none;color:var(--text);cursor:pointer;display:grid;place-items:center;border-radius:12px;-webkit-tap-highlight-color:transparent}
+.menu-btn span{display:block;width:20px;height:1.6px;background:currentColor;border-radius:2px;position:relative;transition:background .2s}
+.menu-btn span::before,.menu-btn span::after{content:'';position:absolute;left:0;width:20px;height:1.6px;background:currentColor;border-radius:2px;transition:transform .25s}
+.menu-btn span::before{top:-6px}.menu-btn span::after{top:6px}
+.menu-btn[aria-expanded="true"] span{background:transparent}
+.menu-btn[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.menu-btn:focus-visible{outline:2px solid var(--v4);outline-offset:2px}
+.menu-overlay{position:fixed;inset:0;z-index:15;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:80px clamp(28px,8vw,64px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;overflow-y:auto}
+.menu-overlay.is-open{opacity:1;visibility:visible}
+.menu-overlay a{display:block;max-width:420px;width:100%;margin:0 auto;padding:16px 0;border-bottom:1px solid var(--line,#E6D9CD);color:var(--text);text-decoration:none;font-size:clamp(17px,16px + .4vw,20px);letter-spacing:.04em}
+.menu-overlay a:first-child{border-top:1px solid var(--line,#E6D9CD)}
+.menu-overlay a[aria-current="page"]{color:var(--v4);font-weight:700}
+body.menu-open{overflow:hidden}
+
+header.hd{position:sticky;top:0;z-index:20;align-items:center;flex-wrap:nowrap;background:var(--bg);margin-left:calc(-1*var(--px));margin-right:calc(-1*var(--px));padding:12px var(--px);margin-top:calc(-1*clamp(24px,5vw,64px));padding-top:calc(clamp(24px,5vw,64px) - 4px);transition:padding .2s}
+header.hd::after{content:'';position:absolute;left:var(--px);right:var(--px);bottom:0;border-bottom:1px solid var(--line,#E6D9CD);opacity:0;transition:opacity .2s}
+header.hd.is-scrolled{padding-top:10px;padding-bottom:10px}header.hd.is-scrolled::after{opacity:1}
+.legal-tabs{display:flex;flex-wrap:wrap;gap:0 26px;margin:16px 0 14px;border-bottom:1px solid var(--line,#E6D9CD)}
+.legal-tabs a{display:flex;align-items:center;min-height:44px;color:var(--text-muted);text-decoration:none;font-size:clamp(13.5px,12.8px + .2vw,15px);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+.legal-tabs a[aria-current="page"]{color:var(--text);border-bottom-color:var(--v4)}
+.legal-top{display:flex;align-items:center;min-height:44px;width:fit-content;margin:28px 0 0 auto;color:var(--text-muted)!important;text-decoration:none;font-size:13px}
+footer{margin:76px 0 0;padding-top:24px;border-top:1px solid var(--line,#E6D9CD);font-size:13px;color:var(--text-muted)}
+.legal-top+footer{margin-top:4px}
+footer .f-copy{margin:0;color:var(--text-muted)}
+html{scroll-padding-top:80px}
+.legal-tabs+.upd{margin-bottom:18px}
+/* 距離をお手本（よくばりかけいぼ 11/19）にそろえる：題の下6px・段落どうし6px・見出しの上40px・箇条書きの上下12px/16px・行の高さ1.95 */
+body{line-height:1.95}
+.page h1{margin-bottom:6px}
+.page .upd{margin:0 0 18px}
+.page p{margin-top:6px;margin-bottom:6px}
+.page .lead+h2,.page h2{margin-top:40px}
+.page .upd+.lead{margin-top:6px}
+.page ul{margin:12px 0 16px}
+/* お問い合わせ：題の下28px・ボタンの行は上24px・下28px */
+.page .contact-h1{margin-bottom:28px}.page .btn-row{margin:24px 0 28px}
+</style><link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png"><link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png"><link rel="apple-touch-icon" href="images/apple-touch-icon.png"></head><body><div class="page" id="top"><header class="hd"><a class="brand" href="https://in-app-tools.pages.dev/YOURTRAVELS/">YOUR <em>TRAVELS</em></a><button class="menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="menuOverlay" data-menu-btn><span></span></button></header><nav class="menu-overlay" id="menuOverlay" aria-label="ページの一覧" inert><a href="https://in-app-tools.pages.dev/YOURTRAVELS/">トップ</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/privacy">プライバシーポリシー</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/terms" aria-current="page">利用規約・免責事項</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/faq">よくある質問</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/contact">お問い合わせ</a><a href="https://in-app-tools.pages.dev/app/">ほかのアプリ</a></nav><h1>利用規約・免責事項</h1><nav class="legal-tabs" aria-label="規約とポリシー"><a href="https://in-app-tools.pages.dev/YOURTRAVELS/privacy">プライバシーポリシー</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/terms" aria-current="page">利用規約・免責事項</a></nav><p class="upd">最終更新日：2026年11月2日</p><p class="lead">この利用規約・免責事項（以下「本規約」といいます。）は、iN（以下「運営者」といいます。）が提供するiPhone向けアプリ「YOUR TRAVELS」（以下「本アプリ」といいます。）の利用条件と、運営者の責任の範囲を定めるものです。</p>
   <p class="lead">利用者は、本アプリを利用した時点で、本規約に同意したものとみなします。</p>
 
   <h2>禁止事項</h2>
@@ -177,4 +217,12 @@ h2{font-size:clamp(17px,15.6px + .45vw,21px)}
 
   <h2>お問い合わせ</h2>
   <p>本アプリおよび本規約に関するお問い合わせは、<a href="https://in-app-tools.pages.dev/YOURTRAVELS/contact">お問い合わせ</a>よりご連絡ください。</p>
-<footer><nav class="nav bottom"><a href="https://in-app-tools.pages.dev/YOURTRAVELS/">ホームに戻る</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/faq">よくある質問</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/privacy">プライバシーポリシー</a><a href="https://in-app-tools.pages.dev/YOURTRAVELS/contact">お問い合わせ</a></nav><p class="f-copy"><span class="nm">YOUR TRAVELS</span> &copy; 2026 iN</p></footer></div></body></html>
+<a class="legal-top" href="#top">ページの先頭へ ↑</a>
+<footer><p class="f-copy"><span class="nm">YOUR TRAVELS</span> &copy; 2026 iN</p></footer></div><script>
+(function(){var b=document.querySelector('[data-menu-btn]'),m=document.getElementById('menuOverlay');if(!b||!m)return;
+function set(o){b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'メニューを閉じる':'メニューを開く');m.classList.toggle('is-open',o);document.body.classList.toggle('menu-open',o);if(o){m.removeAttribute('inert')}else{m.setAttribute('inert','')}}
+b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true')});
+m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+var h=document.querySelector('header');function sc(){h.classList.toggle('is-scrolled',scrollY>8)}addEventListener('scroll',sc,{passive:true});sc();})();
+</script></body></html>
